@@ -1,6 +1,6 @@
 
 
 from miflora.miflora_poller import MiFloraPoller
-from btlewrap.pygatt import PygattBackend
+from btlewrap.bluepy import BluepyBackend
 
-poller = MiFloraPoller('some mac address', PygattBackend)
+poller = MiFloraPoller('some mac address', BluepyBackend)
