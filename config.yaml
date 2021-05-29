@@ -1,4 +1,4 @@
-specific_file_path: ./specific_config.yaml
+custom_file_path: ./specific_config.yaml
 devices:
   - mac: any_mac_address
     name: any_device_name
