@@ -1,0 +1,18 @@
+specific_file_path: ./specific_config.yaml
+devices:
+  - mac: any_mac_address
+    name: any_device_name
+    moisture:
+      high: 100
+      low: 0
+    fertility:
+      high: 100000
+      low: 0
+    light:
+      high: 30000
+      low: 1000
+    temp:
+      high: 30
+      low: 10
+    battery:
+      low: 15
