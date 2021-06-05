@@ -3,16 +3,21 @@ devices:
   - mac: any_mac_address
     name: any_device_name
     moisture:
+      check: true
       high: 100
-      low: 0
+      low: 10
     fertility:
+      check: true
       high: 100000
       low: 0
     light:
+      check: false
       high: 30000
       low: 1000
     temp:
+      check: false
       high: 30
-      low: 10
+      low: 5
     battery:
+      check: true
       low: 15

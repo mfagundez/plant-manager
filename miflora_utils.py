@@ -9,8 +9,16 @@ from miflora.miflora_poller import MiFloraPoller, MI_CONDUCTIVITY, MI_MOISTURE, 
 from miflora import miflora_scanner
 from btlewrap.bluepy import BluepyBackend
 
+FIRMWARE = "Firmware"
+MOISTURE = "Moisture"
+TEMPERATURE = "Temperature"
+LIGHT = "Light"
+FERTILIZER = "Fertilizer"
+BATTERY = "Battery"
+
 def connect(mac):
-    return MiFloraPoller(mac, BluepyBackend)
+    # return MiFloraPoller(mac, BluepyBackend)
+    return
 
 def scan():
     print('Looking for MiFlora devices...')
@@ -20,9 +28,13 @@ def scan():
         print('  {}'.format(device))
 
 def poll(poller):
-    print("Firmware: {}".format(poller.firmware_version()))
-    print("Temperature: {}".format(poller.parameter_value(MI_TEMPERATURE)))
-    print("Moisture: {}".format(poller.parameter_value(MI_MOISTURE)))
-    print("Light: {}".format(poller.parameter_value(MI_LIGHT)))
-    print("Fertilizer: {}".format(poller.parameter_value(MI_CONDUCTIVITY)))
-    print("Battery: {}".format(poller.parameter_value(MI_BATTERY)))
+    device_info = {}
+    device_info[FIRMWARE] = poller.firmware_version()
+    device_info[TEMPERATURE] = poller.parameter_value(MI_TEMPERATURE)
+    device_info[MOISTURE] = poller.parameter_value(MI_MOISTURE)
+    device_info[LIGHT] = poller.parameter_value(MI_LIGHT)
+    device_info[FERTILIZER] = poller.parameter_value(MI_CONDUCTIVITY)
+    device_info[BATTERY] = poller.parameter_value(MI_BATTERY)
+
+    return device_info
+
