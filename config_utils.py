@@ -5,6 +5,19 @@
 #######
 import yaml
 
+DEVICES = "devices"
+CUSTOM_FILE_PATH = "custom_file_path"
+MAC = "mac"
+NAME = "name"
+MOISTURE = "moisture"
+FERTILITY = "fertility"
+LIGHT = "light"
+TEMP = "temp"
+BATTERY = "battery"
+CHECK = "check"
+HIGH = "high"
+LOW = "low"
+
 class config_values:
     defaultconfig = ""
     customconfig = ""
@@ -16,7 +29,7 @@ class config_values:
             except yaml.YAMLError as exc:
                 print(exc)
 
-        custom_filename = self.defaultconfig['custom_file_path']
+        custom_filename = self.defaultconfig[CUSTOM_FILE_PATH]
         with open(custom_filename, 'r') as stream:
             try:
                 self.customconfig = yaml.safe_load(stream)
