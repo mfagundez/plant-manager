@@ -20,4 +20,5 @@ devices:
       low: 5
     battery:
       check: true
+      high: 100
       low: 15
