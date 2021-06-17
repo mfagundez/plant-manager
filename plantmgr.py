@@ -44,3 +44,5 @@ for device in devices:
     or (not valid_value(device, config_utils.FERTILITY, read_data[config_utils.FERTILITY]))
     or (not valid_value(device, config_utils.BATTERY, read_data[config_utils.BATTERY]))):
         devices_in_error[device[config_utils.NAME]] = read_data
+
+print(devices_in_error)

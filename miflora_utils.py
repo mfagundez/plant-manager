@@ -17,8 +17,7 @@ FERTILIZER = "Fertilizer"
 BATTERY = "Battery"
 
 def connect(mac):
-    # return MiFloraPoller(mac, BluepyBackend)
-    return
+    return MiFloraPoller(mac, BluepyBackend)
 
 def scan():
     print('Looking for MiFlora devices...')
@@ -35,6 +34,5 @@ def poll(poller):
     device_info[LIGHT] = poller.parameter_value(MI_LIGHT)
     device_info[FERTILIZER] = poller.parameter_value(MI_CONDUCTIVITY)
     device_info[BATTERY] = poller.parameter_value(MI_BATTERY)
-
     return device_info
 
