@@ -5,6 +5,16 @@
 #######
 import yaml
 
+SMTPINFO = "smtp-info"
+APIKEY = "apikey"
+APISECRET = "apisecret"
+SENDERMAIL = "sender-mail"
+SENDERNAME = "sender-name"
+MAILINFO = "mail-info"
+MAILTO = "to"
+MAILCC = "cc"
+MAILBCC = "bcc"
+MAILSUBJECT = "subject"
 DEVICES = "devices"
 CUSTOM_FILE_PATH = "custom_file_path"
 MAC = "mac"

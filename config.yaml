@@ -1,4 +1,14 @@
 custom_file_path: ./specific_config.yaml
+smtp-info:
+  apikey: YOUR_MAILJET_APIKEY
+  apisecret: YOUR_MAILJET_APISECRET
+  sender-mail: sender@domain.com
+  sender-name: sender name
+mail-info:
+  to: mailto@domain.com
+  cc:
+  bcc:
+  subject: "[WARN] Plants Manager: You have to water your plants"
 devices:
   - mac: any_mac_address
     name: any_device_name
