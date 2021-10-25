@@ -4,10 +4,12 @@
 # Module to send emails using [MailJet](https://www.mailjet.com/) service
 #######
 import mailjet_rest
+import logging
 
 class mail_sender:
 
     mailjet = ''
+    log = logging.getLogger(__name__)
 
     # Sets the client's api key and secret
     def __init__(self, api_key, api_secret):
@@ -53,7 +55,8 @@ class mail_sender:
 
         # According to https://dev.mailjet.com/email/reference/overview/errors/ 
         if(result.status_code != 200):
-            print ("An error occurred: " + str(result.status_code))
-            print (result.json())
+            self.log.error("An error occurred: " + str(result.status_code))
+            self.log.debug(result.json())
             raise ConnectionError(result)
+        self.log.debug("mail sent to " + mailto)
         return result
