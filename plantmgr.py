@@ -7,13 +7,16 @@
 import miflora_utils
 import config_utils
 import mail_sender
+import logging
+
+log = logging.getLogger(__name__)
 
 # check if value received is between allowed range for the device and param provided
 def valid_value(device, param, value):
     if ((device[param][config_utils.CHECK])
     and ((device[param][config_utils.HIGH] < value)
         or (device[param][config_utils.LOW] >= value))):
-        print("alert " + param + " out of range")
+        log.warning("alert " + param + " out of range")
         return False
     else:
         return True
@@ -43,7 +46,12 @@ def prepare_mail_message(devices_in_error, devices_ok, devices_unknown):
         message = message + "</ul></p>"
     return message
 
+
+
 configreader = config_utils.config_values()
+loglevel = configreader.get_best_value(config_utils.LOGLEVEL)
+logging.basicConfig(level=loglevel,format='%(asctime)s %(name)s %(message)s')
+
 devices = configreader.get_best_value(config_utils.DEVICES)
 
 # mail sender init. with api key & secret
@@ -60,7 +68,7 @@ devices_unknown = list()
 for device in devices:
     read_data = dict()
     mac = device[config_utils.MAC]
-    print("==> Device: " + device[config_utils.NAME] + "["+ mac + "]")
+    log.info("==> Device: " + device[config_utils.NAME] + "["+ mac + "]")
     # connect and get data from device
     try:
         poller = miflora_utils.connect(mac)
@@ -84,13 +92,17 @@ for device in devices:
             devices_ok[device[config_utils.NAME]] = read_data
     except Exception:
         # catch any exception (usually due to connection issues)
-        print("An error occurred while connecting to " + device[config_utils.NAME] + "["+ mac + "]")
+        log.error("An error occurred while connecting to " + device[config_utils.NAME] + "["+ mac + "]")
         devices_unknown.append(device[config_utils.NAME])
 
 # Mail is sent just if any device is out of range, but including all data for information purposes
 if(len(devices_in_error) > 0):
     message = prepare_mail_message(devices_in_error, devices_ok, devices_unknown)
+    log.debug("message to send = " + message)
     mail_info = configreader.get_best_value(config_utils.MAILINFO)
     mailsender.send_email(smtp[config_utils.SENDERMAIL], smtp[config_utils.SENDERNAME], 
         mail_info[config_utils.MAILTO], mail_info[config_utils.MAILCC], mail_info[config_utils.MAILBCC], 
         mail_info[config_utils.MAILSUBJECT], message)
+    log.debug("Sending complete!")
+else:
+    log.debug("Any plant is in error status!")
