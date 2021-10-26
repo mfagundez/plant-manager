@@ -1,4 +1,5 @@
-log_level: INFO
+mode: DEMO
+log_level: DEBUG
 custom_file_path: ./specific_config.yaml
 smtp_info:
   apikey: YOUR_MAILJET_APIKEY
