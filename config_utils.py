@@ -6,6 +6,7 @@
 import logging
 import yaml
 
+MODE = "mode"
 LOGLEVEL = "log_level"
 SMTPINFO = "smtp_info"
 APIKEY = "apikey"
