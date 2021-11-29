@@ -18,5 +18,6 @@ crontab -e
 ## Dependences (WIP)
 :warning: this list is not completed.
 ```sh
+pip3 install PyYAML
 pip3 install mailjet_rest
 ```

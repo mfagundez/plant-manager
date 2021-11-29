@@ -87,6 +87,7 @@ for device in devices:
         read_data[config_utils.LIGHT] = device_info[miflora_utils.LIGHT]
         read_data[config_utils.FERTILITY] = device_info[miflora_utils.FERTILIZER]
         read_data[config_utils.BATTERY] = device_info[miflora_utils.BATTERY]
+        read_data[config_utils.FIRMWARE] = device_info[miflora_utils.FIRMWARE]
 
         # check values if enabled, adding device to dict if any param is not valid
         if (not valid_value(device, config_utils.MOISTURE, read_data[config_utils.MOISTURE])):
