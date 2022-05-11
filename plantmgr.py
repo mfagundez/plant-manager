@@ -28,6 +28,7 @@ def valid_value(device, param, value):
 # devices that need to be reviewed, then the unknown due to connection problems
 # and finally the other ones.
 def prepare_mail_message(devices_in_error, devices_ok, devices_unknown):
+    message = ""
     if (len(devices_in_error) > 0):
         message = "<p>Following plants need to be reviewed: </p><p><ul>" 
         error_keys = devices_in_error.keys()
@@ -113,17 +114,19 @@ for device in devices:
         log.error("An error occurred while connecting to " + device[config_utils.NAME] + "["+ mac + "]",exc_info=True)
         devices_unknown.append(device[config_utils.NAME])
 
-# Mail is sent just if any device is out of range, but including all data for information purposes
+mail_info = configreader.get_best_value(config_utils.MAILINFO)
+# Mail is sent even if any device is out of range, but the subject changes.
 if(len(devices_in_error) > 0):
+    subject = mail_info[config_utils.MAILSUBJECT_WARN]
+else:
+    subject = mail_info[config_utils.MAILSUBJECT_OK]
+if (mode != 'DEMO'):
     message = prepare_mail_message(devices_in_error, devices_ok, devices_unknown)
     log.debug("message to send = " + message)
-    mail_info = configreader.get_best_value(config_utils.MAILINFO)
-    if (mode != 'DEMO'):
-        mailsender.send_email(smtp[config_utils.SENDERMAIL], smtp[config_utils.SENDERNAME], 
-            mail_info[config_utils.MAILTO], mail_info[config_utils.MAILCC], mail_info[config_utils.MAILBCC], 
-            mail_info[config_utils.MAILSUBJECT], message)
-        log.debug("Sending complete!")
-    else:
-        log.warning("DEMO mode is active")
+    
+    mailsender.send_email(smtp[config_utils.SENDERMAIL], smtp[config_utils.SENDERNAME], 
+        mail_info[config_utils.MAILTO], mail_info[config_utils.MAILCC], mail_info[config_utils.MAILBCC], 
+        subject, message)
+    log.debug("Sending complete!")
 else:
-    log.debug("Any plant is in error status!")
+    log.warning("DEMO mode is active")

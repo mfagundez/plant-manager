@@ -10,7 +10,8 @@ mail_info:
   to: mailto@domain.com
   cc:
   bcc:
-  subject: "[WARN] Plants Manager: You have to water your plants"
+  subject_warn: "[WARN] Plants Manager: You have to review your plants"
+  subject_ok: "[OK] Plants Manager: Keep up the good work!"
 devices:
   - mac: any_mac_address
     name: any_device_name
