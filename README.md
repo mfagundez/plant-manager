@@ -16,8 +16,10 @@ crontab -e
 ```
 
 ## Dependences (WIP)
-:warning: this list is not completed.
 ```sh
 pip3 install PyYAML
 pip3 install mailjet_rest
+pip3 install miflora
+pip3 install bluepy
 ```
+Note: look bluepy installation instructions [here](https://github.com/IanHarvey/bluepy) depending your OS and Python version
